@@ -1,0 +1,31 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  webAppName: 'myfirstcicdwebapp'
+
+steps:
+  - checkout: self
+
+  - task: ArchiveFiles@2
+    displayName: 'Create deployment package'
+    inputs:
+      rootFolderOrFile: '$(Build.SourcesDirectory)'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/site.zip'
+      replaceExistingArchive: true
+
+  - task: AzureWebApp@1
+    displayName: 'Deploy to Azure Web App'
+    inputs:
+      azureSubscription: 'sc-azure-appservice'
+      appType: 'webAppLinux'
+      appName: '$(webAppName)'
+      package: '$(Build.ArtifactStagingDirectory)/site.zip'
+
