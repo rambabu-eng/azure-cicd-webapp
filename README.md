@@ -65,3 +65,34 @@ Add your screenshots in the `/screenshots` folder and reference them here.
 ## Author
 Rambabu Katta  
 This project is part of my Azure Cloud Engineering learning journey to build hands-on, job-ready projects.
+
+---
+
+## Azure DevOps CI/CD Pipeline
+
+This repository also includes an **Azure DevOps Pipeline** that deploys the same application to **Azure App Service**, using the same source code.
+
+### Pipeline Overview
+The Azure DevOps pipeline is defined using YAML and follows a standard CI/CD flow:
+1. Source code is pulled from the GitHub repository
+2. Application files are packaged into a ZIP artifact
+3. Deployment is performed using an **Azure Resource Manager Service Connection**
+
+### Pipeline Definition
+- Pipeline file: `azure-pipelines.yml`
+- Authentication: Azure Resource Manager **Service Connection**
+- Target: Azure App Service (Linux Web App)
+
+### Azure DevOps Pipeline Execution Note
+
+At the time of implementation:
+- Microsoft-hosted build agents were temporarily unavailable for this organization
+- Free parallelism grants were paused by Microsoft until **January 13**
+- Self-hosted agent registration required organization-level permissions that were not available
+
+As a result:
+- The Azure DevOps pipeline is fully **configured and validated**
+- Pipeline execution depends on agent availability or administrative access
+- The **GitHub Actions pipeline** in this repository is fully **executed and deployed successfully**
+
+This reflects a real-world DevOps scenario where pipeline design is complete, but execution is constrained by platform or organizational policies.
